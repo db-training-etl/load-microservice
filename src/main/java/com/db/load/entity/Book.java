@@ -1,4 +1,4 @@
-package com.db.load.Entity;
+package com.db.load.entity;
 
 import lombok.Data;
 
