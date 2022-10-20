@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Counterparty {
-    Integer bookId;
-    String bookName;
-    String bookAddress;
+    Integer counterpartyId;
+    String counterpartyName;
+    String source;
     String entity;
 }
