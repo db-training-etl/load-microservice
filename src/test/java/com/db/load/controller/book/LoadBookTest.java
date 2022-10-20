@@ -1,6 +1,7 @@
-package com.db.load.controller.counterparty;
+package com.db.load.controller.book;
 
-import com.db.load.controller.trade.LoadTrade;
+import com.db.load.controller.counterparty.LoadCounterparty;
+import com.db.load.entity.Book;
 import com.db.load.entity.Counterparty;
 import com.db.load.entity.Trade;
 import com.db.load.service.FileLoaderService;
@@ -17,9 +18,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class LoadCounterpartyTest {
+class LoadBookTest {
 
-    LoadCounterparty loadCounterpartyController;
+    LoadBook loadBookController;
 
     @Mock
     FileLoaderService fileLoaderService;
@@ -28,13 +29,13 @@ class LoadCounterpartyTest {
     void setUp() throws IOException {
         MockitoAnnotations.openMocks(this); //without this you will get NPE
 
-        loadCounterpartyController = new LoadCounterparty(fileLoaderService);
-        when(fileLoaderService.load(anyString(), eq(Trade.class))).thenReturn(List.of(new Trade()));
+        loadBookController = new LoadBook(fileLoaderService);
+        when(fileLoaderService.load(anyString(), eq(Book.class))).thenReturn(List.of(new Book()));
     }
 
     @Test
     void load() throws IOException {
-        loadCounterpartyController.load("fileRoute");
-        verify(fileLoaderService).load("fileRoute", Counterparty.class);
+        loadBookController.load("fileRoute");
+        verify(fileLoaderService).load("fileRoute", Book.class);
     }
 }

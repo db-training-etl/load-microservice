@@ -1,7 +1,6 @@
 package com.db.load.controller.counterparty;
 
 import com.db.load.entity.Counterparty;
-import com.db.load.entity.Trade;
 import com.db.load.service.FileLoaderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoadCounterpartyTestIT {
+class LoadBookTestIT {
 
     @Autowired
     MockMvc mockMvc;
