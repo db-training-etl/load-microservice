@@ -1,11 +1,14 @@
-package com.db.load.controller;
+package com.db.load.controller.trade;
 
+import com.db.load.entity.Trade;
 import com.db.load.service.FileLoaderService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -15,28 +18,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoadListenerControllerTest {
+class LoadTestIT {
 
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
+    @SpyBean
     FileLoaderService fileLoaderService;
 
     @Test
     void load_ok() throws Exception {
-        mockMvc.perform(post("/load")
-                        .param("fileRoute", "/home/")
+        mockMvc.perform(post("/trades/load")
+                        .param("fileRoute", "src/test/resources/trade.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(fileLoaderService).load("/home/");
+        verify(fileLoaderService).load("src/test/resources/trade.json", Trade.class);
     }
 
     @Test
     void load_badRequest() throws Exception {
-        mockMvc.perform(post("/load")
+        mockMvc.perform(post("/trades/load")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void load_notFound() throws Exception {
+        mockMvc.perform(post("/trades/load")
+                        .param("fileRoute", "src/test/resources/tradee.json")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

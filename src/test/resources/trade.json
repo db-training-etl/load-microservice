@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "tradeName": "hola",
+    "bookId": 1,
+    "country": "CA",
+    "counterpartyId": 2,
+    "currency": "USD",
+    "cobDate": "2022-10-10",
+    "amount": 10.0,
+    "tradeTax": false
+  }
+]

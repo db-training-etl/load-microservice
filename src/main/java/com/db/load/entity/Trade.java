@@ -1,6 +1,7 @@
 package com.db.load.entity;
 
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 
