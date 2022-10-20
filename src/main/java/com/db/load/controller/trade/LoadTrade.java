@@ -5,13 +5,12 @@ import com.db.load.service.FileLoaderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/trades/load")
-public class Load {
+@RequestMapping("/trades/loadFromDirectory")
+public class LoadTrade {
 
     FileLoaderService fileLoaderService;
 
