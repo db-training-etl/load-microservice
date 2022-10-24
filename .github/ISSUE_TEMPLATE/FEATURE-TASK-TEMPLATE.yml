@@ -2,8 +2,6 @@ name: Feature
 description: Request a task to be completed
 title: "feat: <title>"
 labels: ["enhancement"]
-assignees:
-  - ${{ github.actor }}
 body:
   - type: textarea
     attributes:
