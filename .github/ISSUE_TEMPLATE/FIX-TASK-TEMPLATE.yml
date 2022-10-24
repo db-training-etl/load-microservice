@@ -9,6 +9,8 @@ body:
       description: Describe the bug
       placeholder: |
           When I do something, I expect something to happen, but instead something else happens.
+    validations:
+        required: true
   - type: textarea
     attributes:
       label: Additional Context
