@@ -1,239 +1,251 @@
 openapi: 3.0.3
 info:
   title: Load Microservice
-  description:  Load Microservice
+  description: Load Microservice
   version: 1.0.0
 servers:
   - url: 'https'
 paths:
-    /trades/load:
-      post:
-        summary: Load trades
+  /trades/load:
+    post:
+      summary: Load trades
+      description: Load trades
+      operationId: loadTrades
+      tags:
+        - trades
+      requestBody:
         description: Load trades
-        operationId: loadTrades
-        tags:
-          - trades
-        requestBody:
-          description: Load trades
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadTradesRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LoadTradesRequest'
-          required: true
-        responses:
-          '200':
-            description: Successful operation
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadTradesResponse'
-          '400':
-            description: Invalid input
-          '500':
-            description: Internal Server Error
-    /trades/load/async:
-        post:
-          summary: Load trades asynchronously
-          description: Load trades asynchronously
-          operationId: loadTradesAsync
-          tags:
-            - trades
-          requestBody:
-            description: Load trades asynchronously
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadTradesRequest'
-            required: true
-          responses:
-            '200':
-              description: Successful operation
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/LoadTradesResponse'
-            '400':
-              description: Invalid input
-            '500':
-              description: Internal Server Error
-    /counterparties/load:
-      post:
-        summary: Load counterparties
+                $ref: '#/components/schemas/LoadTradesResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /trades/load/async:
+    post:
+      summary: Load trades asynchronously
+      description: Load trades asynchronously
+      operationId: loadTradesAsync
+      tags:
+        - trades
+      requestBody:
+        description: Load trades asynchronously
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadTradesRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadTradesResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /counterparties/load:
+    post:
+      summary: Load counterparties
+      description: Load counterparties
+      operationId: loadCounterparties
+      tags:
+        - counterparties
+      requestBody:
         description: Load counterparties
-        operationId: loadCounterparties
-        tags:
-          - counterparties
-        requestBody:
-          description: Load counterparties
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadCounterpartiesRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LoadCounterpartiesRequest'
-          required: true
-        responses:
-          '200':
-            description: Successful operation
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadCounterpartiesResponse'
-          '400':
-            description: Invalid input
-          '500':
-            description: Internal Server Error
-    /counterparties/load/async:
-        post:
-          summary: Load counterparties asynchronously
-          description: Load counterparties asynchronously
-          operationId: loadCounterpartiesAsync
-          tags:
-              - counterparties
-          requestBody:
-            description: Load counterparties asynchronously
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadCounterpartiesRequest'
-            required: true
-          responses:
-            '200':
-              description: Successful operation
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/LoadCounterpartiesResponse'
-            '400':
-              description: Invalid input
-            '500':
-              description: Internal Server Error
-    /books/load:
-      post:
-        summary: Load books
+                $ref: '#/components/schemas/LoadCounterpartiesResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /counterparties/load/async:
+    post:
+      summary: Load counterparties asynchronously
+      description: Load counterparties asynchronously
+      operationId: loadCounterpartiesAsync
+      tags:
+        - counterparties
+      requestBody:
+        description: Load counterparties asynchronously
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadCounterpartiesRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadCounterpartiesResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /books/load:
+    post:
+      summary: Load books
+      description: Load books
+      operationId: loadBooks
+      tags:
+        - books
+      requestBody:
         description: Load books
-        operationId: loadBooks
-        tags:
-          - books
-        requestBody:
-          description: Load books
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBooksRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LoadBooksRequest'
-          required: true
-        responses:
-          '200':
-            description: Successful operation
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadBooksResponse'
-          '400':
-            description: Invalid input
-          '500':
-            description: Internal Server Error
-    /books/load/async:
-        post:
-          summary: Load books asynchronously
-          description: Load books asynchronously
-          operationId: loadBooksAsync
-          tags:
-            - books
-          requestBody:
-            description: Load books asynchronously
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/LoadBooksRequest'
-            required: true
-          responses:
-            '200':
-              description: Successful operation
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/LoadBooksResponse'
-            '400':
-              description: Invalid input
-            '500':
-              description: Internal Server Error
+                $ref: '#/components/schemas/LoadBooksResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /books/load/async:
+    post:
+      summary: Load books asynchronously
+      description: Load books asynchronously
+      operationId: loadBooksAsync
+      tags:
+        - books
+      requestBody:
+        description: Load books asynchronously
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBooksRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadBooksResponse'
+        '404':
+          description: Not Found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
 components:
-    schemas:
-        LoadTradesRequest:
-          type: object
-          properties:
-            fileRoute:
-              type: string
-        LoadTradesResponse:
-          type: object
-          properties:
-            loadedTrades:
-              type: array
-              items:
-                $ref: '#/components/schemas/Trade'
-        LoadCounterpartiesRequest:
-            type: object
-            properties:
-              fileRoute:
-                type: string
-        LoadCounterpartiesResponse:
-            type: object
-            properties:
-              loadedCounterparties:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Counterparty'
-        LoadBooksRequest:
-            type: object
-            properties:
-              fileRoute:
-                type: string
-        LoadBooksResponse:
-            type: object
-            properties:
-              loadedBooks:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-        Trade:
-          type: object
-          properties:
-              tradeId:
-                type: string
-              tradeName:
-                type: string
-              bookId:
-                type: integer
-              country:
-                type: string
-              counterpartyId:
-                type: integer
-              currency:
-                type: number
-              cobDate:
-                type: string
-              amount:
-                type: integer
-              tradeTax:
-                type: boolean
-        Counterparty:
-          type: object
-          properties:
-            counterpartyId:
-              type: integer
-            counterpartyName:
-              type: string
-            source:
-              type: string
-            entity:
-              type: string
-        Book:
-         type: object
-         properties:
-            bookId:
-              type: integer
-            bookName:
-              type: string
-            bookAddress:
-              type: string
-            entity:
-              type: string
+  schemas:
+    LoadTradesRequest:
+      type: object
+      properties:
+        fileRoute:
+          type: string
+    LoadTradesResponse:
+      type: object
+      properties:
+        loadedTrades:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trade'
+    LoadCounterpartiesRequest:
+      type: object
+      properties:
+        fileRoute:
+          type: string
+    LoadCounterpartiesResponse:
+      type: object
+      properties:
+        loadedCounterparties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Counterparty'
+    LoadBooksRequest:
+      type: object
+      properties:
+        fileRoute:
+          type: string
+    LoadBooksResponse:
+      type: object
+      properties:
+        loadedBooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+    Trade:
+      type: object
+      properties:
+        tradeId:
+          type: string
+        tradeName:
+          type: string
+        bookId:
+          type: integer
+        country:
+          type: string
+        counterpartyId:
+          type: integer
+        currency:
+          type: number
+        cobDate:
+          type: string
+        amount:
+          type: integer
+        tradeTax:
+          type: boolean
+    Counterparty:
+      type: object
+      properties:
+        counterpartyId:
+          type: integer
+        counterpartyName:
+          type: string
+        source:
+          type: string
+        entity:
+          type: string
+    Book:
+      type: object
+      properties:
+        bookId:
+          type: integer
+        bookName:
+          type: string
+        bookAddress:
+          type: string
+        entity:
+          type: string
