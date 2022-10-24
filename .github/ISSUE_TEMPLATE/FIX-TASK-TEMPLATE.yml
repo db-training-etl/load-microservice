@@ -1,14 +1,20 @@
-name: Feature
-description: Request a task to be completed
-title: "feat: <title>"
-labels: ["enhancement"]
+name: Fix
+description: Request a bug fix to be completed
+title: "fix: <title>"
+labels: ["bug"]
 assignees:
   - ${{ github.actor }}
 body:
   - type: textarea
     attributes:
+      label: Bug Description
+      description: Describe the bug
+      placeholder: |
+          When I do something, I expect something to happen, but instead something else happens.
+  - type: textarea
+    attributes:
       label: Acceptance Criteria
-      description: Describe the feature
+      description: Describe how to verify the bug is fixed
       placeholder: |
           GIVEN I am a user
           WHEN I do something
