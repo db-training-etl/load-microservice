@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/books/loadFromDirectory")
+@RequestMapping("/books/load")
 public class LoadBook {
 
     FileLoaderService fileLoaderService;

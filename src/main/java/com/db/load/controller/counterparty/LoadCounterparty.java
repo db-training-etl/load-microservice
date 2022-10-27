@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/counterparties/loadFromDirectory")
+@RequestMapping("/counterparties/load")
 public class LoadCounterparty {
 
     FileLoaderService fileLoaderService;
