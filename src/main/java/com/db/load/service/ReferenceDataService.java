@@ -3,12 +3,12 @@ package com.db.load.service;
 import com.db.load.entity.Book;
 import com.db.load.entity.Counterparty;
 import com.db.load.repository.ReferenceDataRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ReferenceDataService {
 
     ReferenceDataRepository referenceDataRepository;

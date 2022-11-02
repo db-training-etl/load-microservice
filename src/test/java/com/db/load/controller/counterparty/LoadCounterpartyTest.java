@@ -3,6 +3,7 @@ package com.db.load.controller.counterparty;
 import com.db.load.entity.Counterparty;
 import com.db.load.entity.Trade;
 import com.db.load.service.FileLoaderService;
+import com.db.load.service.ReferenceDataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -23,11 +24,14 @@ class LoadBookTest {
     @Mock
     FileLoaderService fileLoaderService;
 
+    @Mock
+    ReferenceDataService referenceDataService;
+
     @BeforeEach
     void setUp() throws IOException {
         MockitoAnnotations.openMocks(this); //without this you will get NPE
 
-        loadCounterpartyController = new LoadCounterparty(fileLoaderService);
+        loadCounterpartyController = new LoadCounterparty(fileLoaderService, referenceDataService);
         when(fileLoaderService.load(anyString(), eq(Counterparty.class))).thenReturn(List.of(new Counterparty()));
     }
 

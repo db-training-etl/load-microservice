@@ -15,11 +15,10 @@ public class ReferenceDataRepositoryWebClient implements ReferenceDataRepository
         this.webClient = WebClient.create(referenceDataServiceUrl);
     }
 
-    //If the server is not available, the client will throw an exception
     @Override
     public Mono<Counterparty> saveCounterparty(Counterparty counterparty) {
         return webClient.put()
-                .uri("/counterparty")
+                .uri("/counterparties")
                 .bodyValue(counterparty)
                 .retrieve()
                 .bodyToMono(Counterparty.class);
@@ -28,7 +27,7 @@ public class ReferenceDataRepositoryWebClient implements ReferenceDataRepository
     @Override
     public Mono<Book> saveBook(Book book) {
         return webClient.put()
-                .uri("/book")
+                .uri("/books")
                 .bodyValue(book)
                 .retrieve()
                 .bodyToMono(Book.class);
