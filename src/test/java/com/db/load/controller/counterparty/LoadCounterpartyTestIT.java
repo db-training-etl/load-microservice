@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoadBookTestIT {
+class LoadCounterpartyTestIT {
 
     @Autowired
     MockMvc mockMvc;
@@ -26,7 +26,7 @@ class LoadBookTestIT {
 
     @Test
     void load_ok() throws Exception {
-        mockMvc.perform(post("/counterparties/loadFromDirectory")
+        mockMvc.perform(post("/counterparties/load")
                         .param("fileRoute", "src/test/resources/counterparty.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -36,14 +36,14 @@ class LoadBookTestIT {
 
     @Test
     void load_badRequest() throws Exception {
-        mockMvc.perform(post("/counterparties/loadFromDirectory")
+        mockMvc.perform(post("/counterparties/load")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void load_notFound() throws Exception {
-        mockMvc.perform(post("/counterparties/loadFromDirectory")
+        mockMvc.perform(post("/counterparties/load")
                         .param("fileRoute", "src/test/resources/counterpardty.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

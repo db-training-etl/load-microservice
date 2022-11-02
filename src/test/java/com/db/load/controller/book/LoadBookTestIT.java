@@ -27,7 +27,7 @@ class LoadBookTestIT {
 
     @Test
     void load_ok() throws Exception {
-        mockMvc.perform(post("/books/loadFromDirectory")
+        mockMvc.perform(post("/books/load")
                         .param("fileRoute", "src/test/resources/book.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -37,14 +37,14 @@ class LoadBookTestIT {
 
     @Test
     void load_badRequest() throws Exception {
-        mockMvc.perform(post("/books/loadFromDirectory")
+        mockMvc.perform(post("/books/load")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void load_notFound() throws Exception {
-        mockMvc.perform(post("/books/loadFromDirectory")
+        mockMvc.perform(post("/books/load")
                         .param("fileRoute", "src/test/resources/boosk.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

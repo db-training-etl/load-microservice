@@ -1,12 +1,16 @@
 package com.db.load.controller.counterparty;
 
 import com.db.load.entity.Counterparty;
-import com.db.load.entity.Trade;
 import com.db.load.service.FileLoaderService;
+import com.db.load.service.ReferenceDataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,18 +20,20 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class LoadBookTest {
+@ExtendWith(MockitoExtension.class)
+class LoadCounterpartyTest {
 
     LoadCounterparty loadCounterpartyController;
 
     @Mock
     FileLoaderService fileLoaderService;
 
+    @Mock
+    ReferenceDataService referenceDataService;
+
     @BeforeEach
     void setUp() throws IOException {
-        MockitoAnnotations.openMocks(this); //without this you will get NPE
-
-        loadCounterpartyController = new LoadCounterparty(fileLoaderService);
+        loadCounterpartyController = new LoadCounterparty(fileLoaderService, referenceDataService);
         when(fileLoaderService.load(anyString(), eq(Counterparty.class))).thenReturn(List.of(new Counterparty()));
     }
 
