@@ -26,7 +26,7 @@ class LoadTradeTestIT {
 
     @Test
     void load_ok() throws Exception {
-        mockMvc.perform(post("/trades/loadFromDirectory")
+        mockMvc.perform(post("/trades/load")
                         .param("fileRoute", "src/test/resources/trade.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -36,14 +36,14 @@ class LoadTradeTestIT {
 
     @Test
     void load_badRequest() throws Exception {
-        mockMvc.perform(post("/trades/loadFromDirectory")
+        mockMvc.perform(post("/trades/load")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     void load_notFound() throws Exception {
-        mockMvc.perform(post("/trades/loadFromDirectory")
+        mockMvc.perform(post("/trades/load")
                         .param("fileRoute", "src/test/resources/tradee.json")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
