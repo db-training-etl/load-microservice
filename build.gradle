@@ -24,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'me.paulschwarz:spring-dotenv:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.5'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
@@ -58,3 +60,13 @@ jacocoTestCoverageVerification {
 check {
     dependsOn jacocoTestCoverageVerification // tests are required to run before generating the report
 }
+
+gradle.taskGraph.whenReady {
+    taskGraph ->
+        if (taskGraph.hasTask(stage)) {
+            test.enabled = false
+        }
+}
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean

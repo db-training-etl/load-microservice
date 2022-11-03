@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/trades/loadFromDirectory")
+@RequestMapping("/trades/load")
 public class LoadTrade {
 
     FileLoaderService fileLoaderService;
