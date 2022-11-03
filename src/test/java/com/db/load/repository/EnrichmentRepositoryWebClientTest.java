@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
@@ -80,8 +81,8 @@ class EnrichmentRepositoryWebClientTest {
                         """));
         //THEN
         StepVerifier.create(enrichmentRepositoryWebClient.enrich(new Trade()))
-                .expectNextMatches(enrichedTradeResponse -> enrichedTradeResponse.getStatusCode() == HttpStatus.BAD_REQUEST)
-                .verifyComplete();
+                .expectError(WebClientResponseException.BadRequest.class)
+                .verify();
     }
 
     @Test
