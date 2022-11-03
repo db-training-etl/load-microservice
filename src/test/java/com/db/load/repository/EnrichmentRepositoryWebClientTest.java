@@ -81,8 +81,8 @@ class EnrichmentRepositoryWebClientTest {
                         """));
         //THEN
         StepVerifier.create(enrichmentRepositoryWebClient.enrich(new Trade()))
-                .expectError(WebClientResponseException.BadRequest.class)
-                .verify();
+                .expectNextMatches(enrichedTradeResponse -> enrichedTradeResponse.getStatusCode() == HttpStatus.BAD_REQUEST)
+                .verifyComplete();
     }
 
     @Test

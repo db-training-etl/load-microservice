@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -24,6 +25,12 @@ public class EnrichmentRepositoryWebClient implements EnrichmentRepository {
                 .bodyValue(trade)
                 .retrieve()
                 .toEntity(Trade.class)
-                .onErrorResume(throwable -> Mono.just(ResponseEntity.badRequest().body(trade)));
+                .onErrorResume(throwable -> {
+                    if (throwable instanceof WebClientResponseException) {
+                        return Mono.just(ResponseEntity.status(((WebClientResponseException) throwable).getStatusCode()).build());
+                    } else {
+                        return Mono.error(throwable);
+                    }
+                });
     }
 }
