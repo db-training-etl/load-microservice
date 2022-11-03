@@ -1,2 +1,4 @@
 reference-data-service:
   url: ${env.REFERENCE_DATA_SERVICE_URL:http://localhost:8080}
+enrichment-service:
+  url: ${env.ENRICHMENT_SERVICE_URL:http://localhost:8080}

@@ -67,7 +67,7 @@ class ReferenceDataRepositoryWebClientTest {
                         """));
         //THEN
         StepVerifier.create(referenceDataRepositoryWebClient.saveCounterparty(new Counterparty()))
-                .expectError(WebClientResponseException.class)
+                .expectError(WebClientResponseException.BadRequest.class)
                 .verify();
     }
 
