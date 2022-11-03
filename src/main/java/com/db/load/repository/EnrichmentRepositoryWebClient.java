@@ -16,12 +16,14 @@ public class EnrichmentRepositoryWebClient implements EnrichmentRepository {
         this.webClient = WebClient.create(enrichmentServiceUrl);
     }
 
+
     @Override
     public Mono<ResponseEntity<Trade>> enrich(Trade trade) {
         return webClient.post()
                 .uri("/trades/enrich")
                 .bodyValue(trade)
                 .retrieve()
-                .toEntity(Trade.class);
+                .toEntity(Trade.class)
+                .onErrorResume(throwable -> Mono.just(ResponseEntity.badRequest().body(trade)));
     }
 }

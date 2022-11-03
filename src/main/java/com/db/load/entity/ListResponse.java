@@ -9,8 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SuccessCountResponse<T> {
+public class ListResponse<T> {
     String message;
     Integer successCount;
     List<T> successList;
+    Integer failedCount;
 }

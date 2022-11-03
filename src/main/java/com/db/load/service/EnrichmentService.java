@@ -1,9 +1,10 @@
 package com.db.load.service;
 
-import com.db.load.entity.SuccessCountResponse;
+import com.db.load.entity.ListResponse;
 import com.db.load.entity.Trade;
 import com.db.load.repository.EnrichmentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,17 +17,18 @@ import java.util.Optional;
 public class EnrichmentService {
     EnrichmentRepository enrichmentRepository;
 
-    public Mono<SuccessCountResponse<Trade>> enrichTrades(List<Trade> trade) {
-        return Flux.fromIterable(trade)
+    public Mono<ListResponse<Trade>> enrichTrades(List<Trade> trades) {
+        return Flux.fromIterable(trades)
                 .flatMap(enrichmentRepository::enrich)
                 .filter(tradeResponseEntity -> tradeResponseEntity.getStatusCode().is2xxSuccessful())
                 .collectList()
-                .map((trades) -> new SuccessCountResponse<>(
+                .map((successTrades) -> new ListResponse<>(
                         "Trades enriched successfully",
-                        trades.size(),
-                        trades.stream().map(
+                        successTrades.size(),
+                        successTrades.stream().map(
                                 tradeResponseEntity -> Optional.ofNullable(tradeResponseEntity.getBody()).orElse(new Trade())
-                        ).toList()
+                        ).toList(),
+                        trades.size() - successTrades.size()
                 ));
     }
 }
